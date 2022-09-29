@@ -1,0 +1,220 @@
+ExpressJS Notes:
+1. Install NodeJS for purposes of package installations
+
+2. Create a folder, open that in vscode
+
+3. Next step is to initialise this folder by npm init
+
+4. Hit enter till end, and you will get package.json folder, which is 
+packages which are installed are kept in this file
+
+5. Install express package, npm install express, You will node modules folder
+very large folder, if you delete that folder, you can install again by npm init
+
+6. Next step is create index.js file
+
+7. From this link https://expressjs.com/en/starter/hello-world.html, copy code of hello
+world basic express example of http server, you can create http server with NodeJS,
+but you have to write custom codes like to write status codes if else statements,
+if 404 error display this message. with express no need to do all that, expressjs will
+automatically set all these and give you with clean codes.
+//Index.js
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/about', (req, res) => {
+  res.send('about')
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+8. Install Thunderclient, run index.js file
+PS F:\ExpressJS_Tuts> node index.js
+Example app listening on port 3000
+
+9. Go to thunderclient, new request, paste http://localhost:3000/, Get method and 
+send you will get hello world message. http://localhost:3000/about, Get method and 
+send you will get about message.
+
+10. Lets create a basic html template, 
+//index.html
+const express = require('express')
+const app = express()
+const path = require('path')
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/about', (req, res) => {
+//   res.send('about')
+res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+11. In index.js file
+const express = require('express')
+const app = express()
+const path = require('path')
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/about', (req, res) => {
+//   res.send('about')
+res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+12. Install npm install -g nodemon, installs nodemon globally
+
+13. Then run npx nodemon index.js
+PS F:\ExpressJS_Tuts> npx nodemon index.js
+npm WARN config global `--global`, `--local` are deprecated. Use `--location=global` instead. 
+[nodemon] 2.0.20
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node index.js`
+Example app listening on port 3000
+
+//Output
+http://localhost:3000/ Hello world
+http://localhost:3000/about I am a complex html template
+
+14. run nodemon, but you need to restart cause, 
+[nodemon] watching extensions: js,mjs,json, not html so restart and refresh
+
+15. Go to boostrap, https://getbootstrap.com/docs/5.2/getting-started/introduction/
+index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+16. boostrap Navbar
+//index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+http://localhost:3000/about , you will see navbar
+
+17. errors
+index.js
+const express = require('express')
+const app = express()
+const path = require('path')
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/about', (req, res) => {
+//   res.send('about')
+res.sendFile(path.join(__dirname, 'index.html'))
+res.status(500)
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+//set res.status(500), in console you will see error
+
+18. Index.js
+const express = require('express')
+const app = express()
+const path = require('path')
+const port = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/about', (req, res) => {
+//   res.send('about')
+// res.sendFile(path.join(__dirname, 'index.html'))
+// res.status(500)
+res.json({"harry": 34})
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+//Output
+{"harry":34}
+
+Status: 20 mins

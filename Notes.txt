@@ -217,4 +217,341 @@ app.listen(port, () => {
 //Output
 {"harry":34}
 
+19. Now lets create a public folder to serve static files. Create public folder inside
+that create index.html file
+//index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>This is index</title>
+  </head>
+  <body>
+    <div class="container">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, sit. Est
+      dolor minima aperiam molestiae, magnam, hic reprehenderit totam maxime
+      dolorum necessitatibus aspernatur fuga esse facilis quis commodi? Dicta
+      aut amet consequuntur possimus at?
+    </div>
+  </body>
+</html>
+
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, "public")))
+//middleware, keep accees of request and response
+//function, keep accees of request and response
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/about", (req, res) => {
+  //   res.send('about')
+  // res.sendFile(path.join(__dirname, 'index.html'))
+  // res.status(500)
+  res.json({ harry: 34 });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+//Output
+Public index.html paragraph will be displayed.
+
+20. Own middleware
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+
+const harryMiddleware = (req, res, next) =>{
+  console.log(req)
+}
+//own middleware, req, res, next.
+//next is used when if there is another middleware after harryMiddleware for
+//example that will be executed or called after harryMiddleware
+
+app.use(express.static(path.join(__dirname, "public")))
+app.use(harryMiddleware)
+//middleware, keep access of request and response
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/about", (req, res) => {
+  //   res.send('about')
+  // res.sendFile(path.join(__dirname, 'index.html'))
+  // res.status(500)
+  res.json({ harry: 34 });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+//refresh the browser to see output, similar output since its lengthy only short
+//output is displayed
+  shouldKeepAlive: true,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: true,
+      sendDate: true,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      _contentLength: null,
+      _hasBody: true,
+      _trailer: '',
+      finished: false,
+      _headerSent: false,
+      _closed: false,
+      socket: [Circular *1],
+      _header: null,
+      _keepAliveTimeout: 5000,
+      _onPendingData: [Function: bound updateOutgoingData],
+      req: [Circular *2],
+      _sent100: false,
+      _expect_continue: false,
+      locals: [Object: null prototype] {},
+      [Symbol(kCapture)]: false,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kOutHeaders)]: [Object: null prototype]
+    },
+    timeout: 0,
+    [Symbol(async_id_symbol)]: 13,
+    [Symbol(kHandle)]: TCP {
+      reading: true,
+      onconnection: null,
+      _consumed: true,
+      [Symbol(owner_symbol)]: [Circular *1]
+    },
+    [Symbol(lastWriteQueueSize)]: 0,
+    [Symbol(timeout)]: Timeout {
+      _idleTimeout: -1,
+      _idlePrev: null,
+      _idleNext: null,
+      _idleStart: 3547,
+      _onTimeout: null,
+      _timerArgs: undefined,
+      _repeat: null,
+      _destroyed: true,
+      [Symbol(refed)]: false,
+      [Symbol(kHasPrimitive)]: false,
+      [Symbol(asyncId)]: 25,
+
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+
+// const harryMiddleware = (req, res, next) =>{
+//   console.log(req)
+//   next()
+// }
+//own middleware, req, res, next.
+
+app.use(express.static(path.join(__dirname, "public")))
+// app.use(harryMiddleware)
+//middleware, keep access of request and response
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/about", (req, res) => {
+  //   res.send('about')
+  // res.sendFile(path.join(__dirname, 'index.html'))
+  // res.status(500)
+  res.json({ harry: 34 });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+21. 
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+
+// const harryMiddleware = (req, res, next) =>{
+//   console.log(req)
+//   next()
+// }
+//own middleware, req, res, next.
+
+app.use(express.static(path.join(__dirname, "public")))
+// app.use(harryMiddleware)
+//middleware, keep access of request and response
+
+app.get("/hello/:name", (req, res) => {
+  res.send("Hello World! " + req.params.name);
+});
+//want to print name along with hello path, also print that name, then use this
+//req.params.name put that code to use this functionality
+
+app.get("/about", (req, res) => {
+  //   res.send('about')
+  // res.sendFile(path.join(__dirname, 'index.html'))
+  // res.status(500)
+  res.json({ harry: 34 });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+//Output
+http://localhost:3000/hello/shyam
+Hello World!shyam
+
+22. Next we will create a Blog website
+for that create a seperate folder called BlogExpress, npm init 
+that folder, enter till end, add description if you want. and create
+index.js file and copy paste the codes and paste in this index.js file
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+
+// const harryMiddleware = (req, res, next) =>{
+//   console.log(req)
+//   next()
+// }
+//own middleware, req, res, next.
+
+app.use(express.static(path.join(__dirname, "static")))
+// app.use(harryMiddleware)
+//middleware, keep access of request and response
+
+app.get("/", (req, res) => {
+  res.sendFile()
+});
+//want to print name along with hello path, also print that name, then use this
+//req.params.name put that code to use this functionality
+
+app.get("/about", (req, res) => {
+  //   res.send('about')
+  // res.sendFile(path.join(__dirname, 'index.html'))
+  // res.status(500)
+  res.json({ harry: 34 });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+
+23. After this create 3 folders static, templates and routes. and
+inside routes create blog.js file. 
+//blog.js
+const express = require("express");
+const router = require(express.Router)
+
+24. //index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, "static")))
+// app.use(harryMiddleware)
+//middleware, keep access of request and response
+
+app.listen(port, () => {
+  console.log(`Blog app listening on http://localhost:${port}`);
+});
+
+//Create a index.html file inside templates folder
+//index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+    This is my blogpage
+</body>
+</html>
+
+
+//blog.js
+const express = require("express");
+const router = require(express.Router)
+
+router.get('/', (req, res) =>{
+    res.sendFile('templates/index.html')
+})
+
+25.
+//index.js
+const express = require("express");
+const app = express();
+const path = require("path");
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, "static")))
+app.use('/', require(path.join(__dirname, 'routes/blog.js')))
+
+app.listen(port, () => {
+  console.log(`Blog app listening on http://localhost:${port}`);
+});
+
+
+//blog.js
+const express = require("express")
+const path = require("path")
+const router = express.Router()
+
+router.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../templates/index.html'))
+})
+//put ../templates link cause there are 3 folders in this app
+//where you have to come out and search this folder and go 
+//inside of it to find the file.
+
+module.exports = router
+
+
+//index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+</head>
+<body>
+    This is my blog homepage
+</body>
+</html>
+
+//Also install npm install -D nodemon, as as dev dependency,
+//cause we don't want to install or use it as a app
+
+
+
 Status: 20 mins
